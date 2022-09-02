@@ -37,6 +37,9 @@
           <button type="submit" class="btn btn-warning">Add User</button>
         </div>
         <div class="table-responsive-md mt-3">
+          <% if (users.length < 1) { %>
+          <div class="alert alert-warning" role="alert">You don't have any user now. Please add user first!</div>
+          <% } else { %>
           <table class="table table-bordered table-dark text-center">
             <thead>
               <tr class="bg-warning text-black-50">
@@ -46,35 +49,20 @@
               </tr>
             </thead>
             <tbody>
+              <% users.forEach(user => { %>
               <tr>
-                <th scope="row">1</th>      
-                <td>Otto</td>
+                <th scope="row"><%= user.id %></th>
+                <td><%= user.username %></td>
                 <td>
-                    <button type="submit" class="btn btn-warning badge">Detail</button>
-                    <button type="submit" class="btn btn-info badge ml-md-5 mr-md-5">Edit</button>
-                    <button type="submit" class="btn btn-danger badge">Delete</button>
+                  <a class="btn btn-warning badge">Detail</a>
+                  <a class="btn btn-info badge ml-md-5 mr-md-5" href="/edit-user/<%= user.id %>">Edit</a>
+                  <a class="btn btn-danger badge">Delete</a>
                 </td>
               </tr>
-              <tr>
-                <th scope="row">2</th>      
-                <td>Thornton</td>
-                <td>
-                    <button type="submit" class="btn btn-warning badge">Detail</button>
-                    <button type="submit" class="btn btn-info badge ml-md-5 mr-md-5">Edit</button>
-                    <button type="submit" class="btn btn-danger badge">Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>      
-                <td>Thornton</td>
-                <td>
-                    <button type="submit" class="btn btn-warning badge">Detail</button>
-                    <button type="submit" class="btn btn-info badge ml-md-5 mr-md-5">Edit</button>
-                    <button type="submit" class="btn btn-danger badge">Delete</button>
-                </td>
-              </tr>
+              <% }) %>
             </tbody>
           </table>
+          <% } %>
         </div>
       </div>
     </div>

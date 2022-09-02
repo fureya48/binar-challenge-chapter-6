@@ -11,10 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      UserGame.hasOne(models.UserBiodata)
+      UserGame.hasMany(models.UserHistory)
     }
   }
   UserGame.init({
-    username: DataTypes.STRING,
+    username: {
+      type: DataTypes.STRING,
+      unique: true
+    },
     password: DataTypes.STRING
   }, {
     sequelize,

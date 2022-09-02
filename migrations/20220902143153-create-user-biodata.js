@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       dob: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       pob: {
         type: Sequelize.STRING

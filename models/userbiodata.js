@@ -11,11 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      UserBiodata.belongsTo(models.UserGame)
     }
   }
   UserBiodata.init({
     user_game_id: DataTypes.INTEGER,
-    dob: DataTypes.DATE,
+    dob: DataTypes.DATEONLY,
     pob: DataTypes.STRING,
     city: DataTypes.STRING,
     gender: DataTypes.ENUM('male', 'female')

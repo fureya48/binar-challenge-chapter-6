@@ -1,6 +1,7 @@
 const express = require("express");
 const hash = require("object-hash");
 const users = require("./data/users.json");
+const models = require("./models")
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -57,14 +58,33 @@ app.use((req, res, next) => {
   }
 });
 
-app.get("/dashboard", (req, res) => {
-  res.render("dashboard");
+app.get("/dashboard", async(req, res) => {
+  const users = await models.UserGame.findAll()
+  res.render("dashboard",{
+    users
+  });
 });
 app.get("/add-user", (req, res) => {
   res.render("add-user");
 });
-app.get("/edit-user", (req, res) => {
-  res.render("edit-user");
+app.get("/edit-user/:id", async(req, res) => {
+  const {id} = req.params
+  const user = await models.UserGame.findOne({
+    where:{id: id}
+  })
+  res.render("edit-user", {
+    user
+  });
+});
+app.post("/edit-user/:id", (req, res) => {
+  const {username, password, dob, pob, place, gender} = req.body
+  console.log(username)
+  console.log(password)
+  console.log(dob)
+  console.log(pob)
+  console.log(place)
+  console.log(gender)
+  res.redirect("/dashboard")
 });
 app.get("/detail-user", (req, res) => {
   res.render("detail-user");
@@ -102,6 +122,11 @@ app.use("/", (req, res) => {
   res.status(404).send("<h1>404 Not Found</h1>");
 });
 
-app.listen(PORT, () => {
-  console.log("Server connected at 3000!");
-});
+models.sequelize.authenticate().then(()=>{
+  app.listen(PORT, () => {
+    console.log("Server connected at http://localhost:3000");
+    console.log("Database connected!")
+  });
+}).catch((err)=>{
+  console.log(err)
+})
