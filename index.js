@@ -48,15 +48,15 @@ app.post("/login", (req, res) => {
   return findUser;
 });
 
-app.use((req, res, next) => {
-  try {
-    findUser.username;
-    findUser.password;
-    next();
-  } catch {
-    res.send("<h1>404 Not Found</h1>");
-  }
-});
+// app.use((req, res, next) => {
+//   try {
+//     findUser.username;
+//     findUser.password;
+//     next();
+//   } catch {
+//     res.send("<h1>404 Not Found</h1>");
+//   }
+// });
 
 app.get("/dashboard", async(req, res) => {
   const users = await models.UserGame.findAll()
@@ -72,20 +72,24 @@ app.get("/edit-user/:id", async(req, res) => {
   const user = await models.UserGame.findOne({
     where:{id: id}
   })
+  const biodata = await models.UserBiodata.findOne({
+    where:{UserGameId: id}
+  })
   res.render("edit-user", {
-    user
+    user,
+    biodata
   });
 });
-app.post("/edit-user/:id", (req, res) => {
-  const {username, password, dob, pob, place, gender} = req.body
-  console.log(username)
-  console.log(password)
-  console.log(dob)
-  console.log(pob)
-  console.log(place)
-  console.log(gender)
+app.post("/edit-user/:id", async(req, res) => {
+  const {id} = req.params
+  const user = await models.UserGame.findOne({where:{id:id}})
+  const biodata = await models.UserBiodata.findOne({where:{UserGameId: id}})
+  console.log(user)
+  await user.update(req.body)
+  await biodata.update(req.body)
   res.redirect("/dashboard")
 });
+
 app.get("/detail-user", (req, res) => {
   res.render("detail-user");
 });

@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   UserHistory.init({
-    user_game_id: DataTypes.INTEGER,
+    UserGameId: DataTypes.INTEGER,
     playing_time: DataTypes.DATE,
     result: DataTypes.ENUM('win', 'lose', 'draw')
   }, {

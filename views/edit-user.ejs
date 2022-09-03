@@ -33,27 +33,28 @@
         <div class="text text-center text-md-left mt-3 mb-3">
           <h2>Add User</h2>
         </div>
-        <div class="form w-75 mt-lg-5 align-self-md-start align-self-center">
+        <div class="form w-75 mt-lg-3 align-self-md-start align-self-center">
           <form class="d-flex flex-column" action="/edit-user/<%= user.id %>" method="POST" >
             <div class="form-group">
               <label>Username</label>
               <input type="text" class="form-control" name="username" value="<%= user.username %>" />
+              <input type="hidden" class="form-control" name="UserGameId" value="<%= user.id %>" />
             </div>
             <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" name="password" value="<%= user.password %>" />
+              <label>Password</label>
+              <input type="text" class="form-control" name="password" value="<%= user.password %>" />
             </div>
             <div class="form-group">
               <label>DOB</label>
-              <input type="date" class="form-control" name="dob" />
+              <input type="date" class="form-control" name="dob" value="<%= biodata.dob %>"  />
             </div>
             <div class="form-group">
               <label>POB</label>
-              <input type="text" class="form-control" name="pob" />
+              <input type="text" class="form-control" name="pob" value="<%= biodata.pob %>" />
             </div>
             <div class="form-group">
               <label>Place</label>
-              <input type="text" class="form-control" name="place" />
+              <input type="text" class="form-control" name="place" value="<%= biodata.city %>" />
             </div>
             <div class="form-group">
               <label>Gender</label>
