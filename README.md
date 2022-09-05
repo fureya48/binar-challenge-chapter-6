@@ -1,10 +1,10 @@
-<h1 align="left">Hi 👋, I'm Fathur Rohman Kistanto</h1>
+<h1 align="left">Hi, I'm Fathur Rohman Kistanto</h1>
 <h3 align="left">Student of Full Stack Web Developer Wave 24 in Binar Academy</h3>
 
 <br>
 <br>
 
-<p align="left"> This is a project challenge from Binar Academy Chapter 6, I used Node.js, Express.js, Sequelize, and PostgeSQL for Backend and I used Bootstrap V4.x.x for styling. </p>
+<p align="left"> This is a project challenge from Binar Academy Chapter 6. I used Node.js, Express.js, Sequelize, and PostgeSQL for Backend and I used Bootstrap V4.x.x for styling. </p>
 
 <br>
 <br>
@@ -25,9 +25,9 @@
 
 <br>
 <br>
-<br>
 
 <h3> Enjoy the game 😊! </h3>
+<br>
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=fureya48&label=Profile%20views&color=0e75b6&style=flat" alt="fureya48" /> </p>
 
@@ -35,7 +35,7 @@
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
-<a href="https://twitter.com/itskindafthr" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="itskindafthr" height="30" width="40" /></a>
+<a href="https://twitter.com/itskindafthr" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="itskindafthr_" height="30" width="40" /></a>
 <a href="https://instagram.com/fathrhmnnn_" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="fathrhmnnn_" height="30" width="40" /></a>
 </p>
 
