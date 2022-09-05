@@ -3,7 +3,7 @@
 
 <br>
 
-<p align="left"> This is a project challenge from Binar Academy Chapter 6. I used Node.js, Express.js, Sequelize, and PostgeSQL for Backend and I used Bootstrap V4.x.x for styling. </p>
+<p align="left"> This is a project challenge from Binar Academy Chapter 6. I used Node.js, Express.js, Sequelize, and PostgeSQL for Backend and I used Bootstrap V4.x.x for styling. I was add login verification if username or password not match. If you not login before, you don't play the game.</p>
 
 <br>
 <br>
@@ -18,9 +18,9 @@
 
 <br>
 
-<p align="left"> - User: </p>
-<p align="left"> username: player </p>
-<p align="left"> password: pl4Y3r </p>
+<p align="left"><b> - User: </b></p>
+<p align="left"><b> username: player </b></p>
+<p align="left"><b> password: pl4Y3r </b></p>
 
 <br>
 <br>
