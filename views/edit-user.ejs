@@ -34,7 +34,7 @@
           <h2>Add User</h2>
         </div>
         <div class="form w-75 mt-lg-3 align-self-md-start align-self-center">
-          <form class="d-flex flex-column" action="/edit-user/<%= user.id %>" method="POST" >
+          <form class="d-flex flex-column" action="/edit-user/<%= user.id %>" method="POST">
             <div class="form-group">
               <label>Username</label>
               <input type="text" class="form-control" name="username" value="<%= user.username %>" />
@@ -46,20 +46,20 @@
             </div>
             <div class="form-group">
               <label>DOB</label>
-              <input type="date" class="form-control" name="dob" value="<%= biodata.dob %>"  />
+              <input type="date" class="form-control" name="dob" value="<%= user.UserBiodatum.dob %>" />
             </div>
             <div class="form-group">
               <label>POB</label>
-              <input type="text" class="form-control" name="pob" value="<%= biodata.pob %>" />
+              <input type="text" class="form-control" name="pob" value="<%= user.UserBiodatum.pob %>" />
             </div>
             <div class="form-group">
-              <label>Place</label>
-              <input type="text" class="form-control" name="place" value="<%= biodata.city %>" />
+              <label>City</label>
+              <input type="text" class="form-control" name="city" value="<%= user.UserBiodatum.city %>" />
             </div>
             <div class="form-group">
               <label>Gender</label>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="gender" id="exampleRadios1" value="male" checked />
+                <input class="form-check-input" type="radio" name="gender" id="exampleRadios1" value="male" />
                 <label class="form-check-label" for="exampleRadios1"> Male </label>
               </div>
               <div class="form-check">

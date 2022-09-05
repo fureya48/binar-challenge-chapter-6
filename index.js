@@ -1,7 +1,7 @@
 const express = require("express");
 const hash = require("object-hash");
 const users = require("./data/users.json");
-const models = require("./models")
+const models = require("./models");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -58,37 +58,87 @@ app.post("/login", (req, res) => {
 //   }
 // });
 
-app.get("/dashboard", async(req, res) => {
-  const users = await models.UserGame.findAll()
-  res.render("dashboard",{
-    users
+app.get("/dashboard", async (req, res) => {
+  const users = await models.UserGame.findAll({ include: models.UserBiodata });
+  res.json(users)
+
+  res.render("dashboard", {
+    users,
   });
 });
-app.get("/add-user", (req, res) => {
-  res.render("add-user");
+
+app.get("/add-user", async (req, res) => {
+  res.render("add-user", {message});
 });
-app.get("/edit-user/:id", async(req, res) => {
-  const {id} = req.params
+
+app.post("/add-user", async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    await models.UserGame.create({
+      username: username,
+      password: password,
+    });
+    res.redirect("/dashboard");
+  } catch (error) {
+    const message = "username has been create"
+    res.render("add-user", {message})
+  }
+});
+
+app.get("/add-biodata/:id", async (req, res) => {
+  const { id } = req.params;
+  const user = await models.UserGame.findOne({ where: { id: id } });
+  res.render("add-user-biodata", { user });
+});
+
+app.post("/add-biodata/:id", async (req, res) => {
+  const { UserGameId, dob, pob, city, gender } = req.body;
+  try {
+    await models.UserBiodata.create({
+      UserGameId: UserGameId,
+      dob: dob,
+      pob: pob,
+      city: city,
+      gender: gender,
+    });
+    res.redirect("/dashboard");
+  } catch (error) {
+    res.send(error);
+  }
+});
+
+app.get("/edit-user/:id", async (req, res) => {
+  const { id } = req.params;
   const user = await models.UserGame.findOne({
+    where: { id: id },
+    include: models.UserBiodata,
+  });
+
+  res.render("edit-user", { user });
+});
+
+app.post("/edit-user/:id", async (req, res) => {
+  const { id } = req.params;
+  const user = await models.UserGame.findOne({ where: { id: id } });
+  const biodata = await models.UserBiodata.findOne({ where: { UserGameId: id } });
+
+  await user.update(req.body);
+  await biodata.update(req.body);
+  res.redirect("/dashboard");
+});
+
+app.get("/delete/:id", async(req, res)=>{
+  const {id} = req.params
+
+  await models.UserGame.destroy({
     where:{id: id}
   })
-  const biodata = await models.UserBiodata.findOne({
+  await models.UserBiodata.destroy({
     where:{UserGameId: id}
   })
-  res.render("edit-user", {
-    user,
-    biodata
-  });
-});
-app.post("/edit-user/:id", async(req, res) => {
-  const {id} = req.params
-  const user = await models.UserGame.findOne({where:{id:id}})
-  const biodata = await models.UserBiodata.findOne({where:{UserGameId: id}})
-  console.log(user)
-  await user.update(req.body)
-  await biodata.update(req.body)
+
   res.redirect("/dashboard")
-});
+})
 
 app.get("/detail-user", (req, res) => {
   res.render("detail-user");
@@ -126,11 +176,14 @@ app.use("/", (req, res) => {
   res.status(404).send("<h1>404 Not Found</h1>");
 });
 
-models.sequelize.authenticate().then(()=>{
-  app.listen(PORT, () => {
-    console.log("Server connected at http://localhost:3000");
-    console.log("Database connected!")
+models.sequelize
+  .authenticate()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log("Server connected at http://localhost:3000");
+      console.log("Database connected!");
+    });
+  })
+  .catch((err) => {
+    console.log(err);
   });
-}).catch((err)=>{
-  console.log(err)
-})
