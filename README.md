@@ -12,9 +12,9 @@
 
 <br>
 
-<p align="left"> - SuperUser: </p>
-<p align="left"> username: admin </p>
-<p align="left"> password: admin123 </p>
+<p align="left"><b> - SuperUser: </b></p>
+<p align="left"><b> username: admin </b></p>
+<p align="left"><b> password: admin123 </b></p>
 
 <br>
 
