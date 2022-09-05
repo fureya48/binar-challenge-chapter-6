@@ -48,27 +48,30 @@ app.post("/login", (req, res) => {
   return findUser;
 });
 
-// app.use((req, res, next) => {
-//   try {
-//     findUser.username;
-//     findUser.password;
-//     next();
-//   } catch {
-//     res.send("<h1>404 Not Found</h1>");
-//   }
-// });
+app.use((req, res, next) => {
+  try {
+    findUser.username;
+    findUser.password;
+    next();
+  } catch {
+    res.status(400)
+    res.send("<h1>404 Not Found</h1>");
+  }
+});
 
 app.get("/dashboard", async (req, res) => {
   const users = await models.UserGame.findAll({ include: models.UserBiodata });
-  res.json(users)
 
+  res.status(200)
   res.render("dashboard", {
     users,
   });
 });
 
 app.get("/add-user", async (req, res) => {
-  res.render("add-user", {message});
+
+  res.status(200)
+  res.render("add-user", { message });
 });
 
 app.post("/add-user", async (req, res) => {
@@ -78,16 +81,21 @@ app.post("/add-user", async (req, res) => {
       username: username,
       password: password,
     });
+
+    res.status(300)
     res.redirect("/dashboard");
   } catch (error) {
-    const message = "username has been create"
-    res.render("add-user", {message})
+    const message = "username has been create";
+    res.status(500)
+    res.render("add-user", { message });
   }
 });
 
 app.get("/add-biodata/:id", async (req, res) => {
   const { id } = req.params;
   const user = await models.UserGame.findOne({ where: { id: id } });
+  
+  res.status(200)
   res.render("add-user-biodata", { user });
 });
 
@@ -101,8 +109,11 @@ app.post("/add-biodata/:id", async (req, res) => {
       city: city,
       gender: gender,
     });
+
+    res.status(200)
     res.redirect("/dashboard");
   } catch (error) {
+    res.status(500)
     res.send(error);
   }
 });
@@ -114,6 +125,7 @@ app.get("/edit-user/:id", async (req, res) => {
     include: models.UserBiodata,
   });
 
+  res.status(200)
   res.render("edit-user", { user });
 });
 
@@ -124,24 +136,35 @@ app.post("/edit-user/:id", async (req, res) => {
 
   await user.update(req.body);
   await biodata.update(req.body);
+
+  res.status(300)
   res.redirect("/dashboard");
 });
 
-app.get("/delete/:id", async(req, res)=>{
-  const {id} = req.params
+app.get("/delete/:id", async (req, res) => {
+  const { id } = req.params;
 
   await models.UserGame.destroy({
-    where:{id: id}
-  })
+    where: { id: id },
+  });
   await models.UserBiodata.destroy({
-    where:{UserGameId: id}
-  })
+    where: { UserGameId: id },
+  });
 
-  res.redirect("/dashboard")
-})
+  res.redirect("/dashboard");
+});
 
-app.get("/detail-user", (req, res) => {
-  res.render("detail-user");
+app.get("/detail-user/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await models.UserGame.findOne({
+      where: { id: id },
+      include: [models.UserBiodata, models.UserHistory],
+    });
+    const histories = user.UserHistories;
+
+    res.render("detail-user", { user, histories });
+  } catch (error) {}
 });
 
 app.get("/home", (req, res) => {
@@ -168,7 +191,7 @@ app.get("/game/:username", (req, res) => {
 
 app.get("/logout", (req, res) => {
   findUser = null;
-  res.status(302);
+  res.status(300);
   res.redirect("/login");
 });
 

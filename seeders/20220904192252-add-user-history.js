@@ -5,36 +5,59 @@ module.exports = {
     await queryInterface.bulkInsert('UserHistories', [{
          UserGameId: 1,
          playing_time: new Date(),
-         result: 'win'
-       },{
-        UserGameId: 1,
-        playing_time: new Date(),
-        result: 'lose'
-      },{
-        UserGameId: 1,
-        playing_time: new Date(),
-        result: 'win'
-      },{
-        UserGameId: 1,
-        playing_time: new Date(),
-        result: 'draw'
-      },{
-        UserGameId: 2,
-        playing_time: new Date(),
-        result: 'win'
-      },{
-       UserGameId: 2,
-       playing_time: new Date(),
-       result: 'lose'
-     },{
-       UserGameId: 2,
-       playing_time: new Date(),
-       result: 'win'
-     },{
-       UserGameId: 2,
-       playing_time: new Date(),
-       result: 'draw'
-     }], {});
+         result: 'win',
+         createdAt: new Date(),
+         updatedAt: new Date()
+       },], {});
+    await queryInterface.bulkInsert('UserHistories', [{
+         UserGameId: 1,
+         playing_time: new Date(),
+         result: 'lose',
+         createdAt: new Date(),
+         updatedAt: new Date()
+       },], {});
+    await queryInterface.bulkInsert('UserHistories', [{
+         UserGameId: 1,
+         playing_time: new Date(),
+         result: 'draw',
+         createdAt: new Date(),
+         updatedAt: new Date()
+       },], {});
+    await queryInterface.bulkInsert('UserHistories', [{
+         UserGameId: 1,
+         playing_time: new Date(),
+         result: 'lose',
+         createdAt: new Date(),
+         updatedAt: new Date()
+       },], {});
+    await queryInterface.bulkInsert('UserHistories', [{
+         UserGameId: 2,
+         playing_time: new Date(),
+         result: 'win',
+         createdAt: new Date(),
+         updatedAt: new Date()
+       },], {});
+    await queryInterface.bulkInsert('UserHistories', [{
+         UserGameId: 2,
+         playing_time: new Date(),
+         result: 'lose',
+         createdAt: new Date(),
+         updatedAt: new Date()
+       },], {});
+    await queryInterface.bulkInsert('UserHistories', [{
+         UserGameId: 2,
+         playing_time: new Date(),
+         result: 'win',
+         createdAt: new Date(),
+         updatedAt: new Date()
+       },], {});
+    await queryInterface.bulkInsert('UserHistories', [{
+         UserGameId: 2,
+         playing_time: new Date(),
+         result: 'draw',
+         createdAt: new Date(),
+         updatedAt: new Date()
+       },], {});
   },
 
   async down (queryInterface, Sequelize) {
