@@ -2,7 +2,6 @@
 <h3 align="left">Student of Full Stack Web Developer Wave 24 in Binar Academy</h3>
 
 <br>
-<br>
 
 <p align="left"> This is a project challenge from Binar Academy Chapter 6. I used Node.js, Express.js, Sequelize, and PostgeSQL for Backend and I used Bootstrap V4.x.x for styling. </p>
 
